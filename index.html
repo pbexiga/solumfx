@@ -790,12 +790,14 @@
     // ── DETECTION ─────────────────────────────────────────────
     // Returns true if device is likely low-end
     function isLowEnd() {
+      // Desktop always gets complex — only check hardware on smaller screens
+      if (window.innerWidth >= 1024) return false;
       // CPU check — undefined means we can't tell, assume capable
-      var cores  = navigator.hardwareConcurrency;
+      var cores   = navigator.hardwareConcurrency;
       var weakCPU = cores !== undefined && cores <= 4;
       // RAM check — undefined (e.g. Safari/iOS) means we can't tell, assume capable
-      var ram    = navigator.deviceMemory;
-      var lowRAM = ram !== undefined && ram <= 4;
+      var ram     = navigator.deviceMemory;
+      var lowRAM  = ram !== undefined && ram <= 4;
       // Only simple if both signals indicate low-end
       return weakCPU && lowRAM;
     }
