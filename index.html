@@ -475,8 +475,9 @@
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
       scroll-behavior: smooth;
+      transition: background 0.8s ease;
+      background: var(--ink);
     }
-
     /* Simple sections — each fills viewport, natural scroll */
     .s-simple {
       min-height: 100vh;
@@ -487,15 +488,6 @@
       padding: 4rem 2rem;
       position: relative;
     }
-
-    /* Simple hero — ink bg */
-    .ss-hero { background: var(--ink); }
-
-    /* Simple word card — ocean bg */
-    .ss-about { background: var(--ocean); }
-
-    /* Simple contact — slate bg */
-    .ss-contact { background: var(--slate); }
 
     /* Simple content reuses most complex classes.
        Animate-in fires immediately, no JS needed — CSS only */
@@ -798,10 +790,14 @@
     // ── DETECTION ─────────────────────────────────────────────
     // Returns true if device is likely low-end
     function isLowEnd() {
-      var smallScreen = window.innerWidth < 768;
-      var weakCPU     = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
-      var lowRAM      = navigator.deviceMemory && navigator.deviceMemory <= 2;
-      return smallScreen && (weakCPU || lowRAM);
+      // CPU check — undefined means we can't tell, assume capable
+      var cores  = navigator.hardwareConcurrency;
+      var weakCPU = cores !== undefined && cores <= 4;
+      // RAM check — undefined (e.g. Safari/iOS) means we can't tell, assume capable
+      var ram    = navigator.deviceMemory;
+      var lowRAM = ram !== undefined && ram <= 4;
+      // Only simple if both signals indicate low-end
+      return weakCPU && lowRAM;
     }
 
     // ── PREFERENCE + INIT ─────────────────────────────────────
@@ -987,6 +983,34 @@
         clearTimeout(fontFallback);
         startComplex();
       });
+    }
+
+    // ── SIMPLE BG OBSERVER ───────────────────────────────────
+    // Watches which simple section is most visible and CSS handles the fade.
+    var simpleBgs = {
+      'ss-hero':    '#1E1E1B',
+      'ss-about':   '#2C3D4F',
+      'ss-contact': '#3D4145',
+    };
+    var simpleContainer = document.getElementById('simple-container');
+    var simpleSections  = document.querySelectorAll('.s-simple');
+
+    if ('IntersectionObserver' in window) {
+      var bgObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.intersectionRatio >= 0.5) {
+            var cl = entry.target.classList;
+            var bg = cl.contains('ss-hero')    ? simpleBgs['ss-hero']
+                   : cl.contains('ss-about')   ? simpleBgs['ss-about']
+                   : cl.contains('ss-contact') ? simpleBgs['ss-contact']
+                   : null;
+            if (bg) simpleContainer.style.background = bg;
+          }
+        });
+      }, { threshold: 0.5 });
+      simpleSections.forEach(function(s) { bgObserver.observe(s); });
+    } else {
+      simpleContainer.style.background = simpleBgs['ss-hero'];
     }
 
     // ── BOOT ──────────────────────────────────────────────────
