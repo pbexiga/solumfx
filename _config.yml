@@ -1,0 +1,7 @@
+# GitHub Pages (Jekyll) settings. This file is not published itself.
+# Everything in the repo is published EXCEPT what is listed here.
+exclude:
+  - tools
+  - originals
+  - README.md
+  - .gitignore
