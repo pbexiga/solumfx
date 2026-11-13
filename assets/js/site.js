@@ -159,7 +159,7 @@
     var nav = doc.getElementById('site-nav');
     if (!btn || !nav) return;
 
-    var inertTargets = doc.querySelectorAll('main, .site-footer, .brand');
+    var inertTargets = doc.querySelectorAll('main, .site-footer');
 
     Array.prototype.forEach.call(nav.querySelectorAll('li'), function (li, n) {
       li.style.setProperty('--i', n);
