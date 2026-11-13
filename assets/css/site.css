@@ -57,6 +57,7 @@ html {
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
+html { scrollbar-gutter: stable; }   /* the scrollbar's space is always reserved: nothing shifts when it appears, disappears or the menu opens */
 html.menu-open { overflow: hidden; }
 
 body {
@@ -388,6 +389,8 @@ html.arriving .glow { transition: none; }   /* after a page switch the glows are
   pointer-events: none;
   z-index: -1;
 }
+/* the rule under the bar stays when the menu opens, above the veil and the backing */
+.js.compact.menu-open .site-header::after { z-index: 4; }
 /* header tucks away while reading down, returns on scroll up */
 .hide-bar:not(.menu-open) .site-header::before,
 .hide-bar:not(.menu-open) .site-header::after,
