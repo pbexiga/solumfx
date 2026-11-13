@@ -15,8 +15,8 @@
 @media (prefers-reduced-motion: no-preference) {
   @view-transition { navigation: auto; }
 }
-::view-transition-old(root) { animation: vt-out 0.32s ease both; }
-::view-transition-new(root) { animation: vt-in 0.7s ease 0.1s both; }
+::view-transition-old(root) { animation: vt-out 0.16s ease both; }
+::view-transition-new(root) { animation: vt-in 0.26s ease both; }
 ::view-transition-group(site-header) { animation-duration: 0s; }
 @keyframes vt-out { to { opacity: 0; } }
 @keyframes vt-in  { from { opacity: 0; } }
@@ -135,6 +135,7 @@ main, .site-footer { position: relative; z-index: 1; }
   transition: opacity 1s ease var(--d, 0s), transform 1s ease var(--d, 0s);
 }
 .js [data-anim].on { opacity: 1; transform: none; }
+html.arriving .glow { transition: none; }   /* after a page switch the glows are there from the first frame */
 
 .fading-rule {
   display: block;
@@ -151,9 +152,32 @@ main, .site-footer { position: relative; z-index: 1; }
 }
 .js .fading-rule.on { opacity: 0.45; transform: scaleX(1); }
 
+/* The same hidden starting state, but straight from the stylesheet: it applies
+   from the very first paint, even if the browser paints the new page (during a
+   page transition) before site.js has run. That is what stops the text from
+   showing, jumping back to its start position and rising again, on iPhone.
+   (No JavaScript: scripting is off, so nothing is hidden.) */
+@media (scripting: enabled) {
+  [data-anim] {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 1s ease var(--d, 0s), transform 1s ease var(--d, 0s);
+  }
+  [data-anim].on { opacity: 1; transform: none; }
+  .fading-rule {
+    opacity: 0;
+    transform: scaleX(0.4);
+    transition: opacity 1.2s ease var(--d, 0.2s), transform 1.2s ease var(--d, 0.2s);
+  }
+  .fading-rule.on { opacity: 0.45; transform: scaleX(1); }
+  /* after a page switch everything arrives faster */
+  html.arriving [data-anim] { transition: opacity 0.6s ease var(--d, 0s), transform 0.6s ease var(--d, 0s); }
+  html.arriving .fading-rule { transition: opacity 0.8s ease var(--d, 0.1s), transform 0.8s ease var(--d, 0.1s); }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .js [data-anim], .js .fading-rule { opacity: 1; transform: none; transition: none; }
-  .js .fading-rule { opacity: 0.45; }
+  [data-anim], .js [data-anim], .js .fading-rule { opacity: 1; transform: none; transition: none; }
+  .fading-rule, .js .fading-rule { opacity: 0.45; transform: none; transition: none; }
   .glow { transition: none; }
 }
 
@@ -285,29 +309,24 @@ main, .site-footer { position: relative; z-index: 1; }
   z-index: 2;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;   /* not 'center': a centred column that overflows is cut off at the top and can't be scrolled back */
   padding: 6rem var(--gutter) max(2.2rem, env(safe-area-inset-bottom, 0px) + 1.4rem);
-  background: rgba(30,30,27,0.93);
+  background:
+    radial-gradient(circle at 100% 100%, rgba(139,125,94,0.22) 0%, rgba(44,61,79,0.18) 40vmax, transparent 75vmax),
+    rgba(30,30,27,0.96);
   -webkit-backdrop-filter: blur(22px);
   backdrop-filter: blur(22px);
+  overflow-x: hidden;           /* the glow behind the links is bigger than the screen: never scroll sideways */
   overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.6s ease, visibility 0s linear 0.6s;
 }
-.js.compact .site-nav::before {
-  content: '';
-  position: absolute;
-  width: 90vmax; height: 90vmax;
-  right: -45vmax; bottom: -45vmax;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(139,125,94,0.22) 0%, rgba(44,61,79,0.18) 45%, transparent 75%);
-  filter: blur(50px);
-  pointer-events: none;
-}
 .js.compact.menu-open .site-nav { opacity: 1; visibility: visible; transition: opacity 0.6s ease; }
 
-.js.compact .site-nav ul { flex-direction: column; gap: 0; position: relative; }
+.js.compact .site-nav ul { flex-direction: column; gap: 0; position: relative; margin-top: auto; }   /* auto margins centre it when there is room, and are 0 when there isn't */
 .js.compact .site-nav li {
   opacity: 0;
   transform: translateY(16px);
@@ -343,6 +362,7 @@ main, .site-footer { position: relative; z-index: 1; }
   display: block;
   position: relative;
   margin-top: 2.4rem;
+  margin-bottom: auto;
   font-family: var(--display);
   font-weight: 300;
   font-size: 0.62rem;
@@ -356,6 +376,18 @@ main, .site-footer { position: relative; z-index: 1; }
 .js.compact.menu-open .nav-foot { opacity: 1; transition: opacity 1s ease 0.75s; }
 .js.compact .site-nav .nav-foot a { font-size: inherit; font-weight: inherit; letter-spacing: inherit; text-transform: none; padding: 0; width: auto; display: inline; border: 0; color: var(--cloud); text-decoration: none; }
 .js.compact .site-nav .nav-foot a::after { display: none; }
+
+/* Open menu: the links scroll underneath SOLUM and the close button. A backing
+   (veil colour, fading out at the bottom) sits above the links and below the bar. */
+.js.compact.menu-open .bar::before {
+  content: '';
+  position: absolute;
+  top: -2.5rem; bottom: -1.3rem;
+  left: calc(-1 * var(--bar-pad)); right: calc(-1 * var(--bar-pad));
+  background: linear-gradient(to bottom, rgba(30,30,27,0.985) 0%, rgba(30,30,27,0.985) 70%, rgba(30,30,27,0) 100%);
+  pointer-events: none;
+  z-index: -1;
+}
 /* header tucks away while reading down, returns on scroll up */
 .hide-bar:not(.menu-open) .site-header::before,
 .hide-bar:not(.menu-open) .site-header::after,
