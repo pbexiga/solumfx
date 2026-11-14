@@ -820,7 +820,7 @@ code { font-family: var(--mono); font-size: 0.88em; padding: 0.1em 0.35em; backg
 @media (min-width: 40rem) { .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.4rem 1.6rem; } }
 @media (min-width: 64rem) { .gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2.6rem 1.8rem; } }
 .gallery-nav { display: flex; flex-wrap: wrap; gap: 0 2rem; margin-top: 2.2rem; }
-.gallery-nav:empty, .gallery-nav.one { display: none; }
+.gallery-nav:empty, .gallery-nav.one, .gallery-nav:not(:has(a)) { display: none; }
 .gallery-nav a[hidden] { display: none; }
 .gallery-nav a {
   position: relative; display: inline-block; padding: 0.7rem 0;

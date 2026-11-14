@@ -35,7 +35,7 @@ PAGE = REPO / "gallery" / "index.html"
 EXT = {".jpg", ".jpeg", ".png", ".webp", ".heic", ".heif"}
 SIZES = (800, 1600)
 CAMERA = re.compile(r"^(img|dsc|pxl|mvimg|photo|image|screenshot)?[- _]?\d[\d_\- .]*$", re.I)
-SECTION_RE = re.compile(r'<section class="gallery-section" id="([a-z0-9-]+)">\s*<h2[^>]*>(.*?)</h2>', re.S)
+SECTION_RE = re.compile(r'<section class="gallery-section" id="([a-z0-9-]+)"(?: hidden)?>\s*<h2[^>]*>(.*?)</h2>', re.S)
 PINNED = re.compile(r"^(\d{1,3})-(.+)-800\.webp$")             # 01-strat-neck-800.webp
 DATED = re.compile(r"^(\d{8})-(\d{6})-(\d{3})-(.+)-800\.webp$")  # 20261112-203015-999-strat-neck-800.webp
 
@@ -145,20 +145,26 @@ def add_photos(slug, title):
 
 
 def rebuild(sections):
+    # A section with no photos stays in the page (that is where the section
+    # list lives) but is marked hidden, so its heading is not shown. The
+    # section links are only written when two or more sections have photos.
     page, _ = read_page()
     blocks, nav = [], []
     for slug, title in sections:
         files = sorted((OUT / slug).glob("*-800.webp"), key=lambda p: sort_key(p.name)) if (OUT / slug).is_dir() else []
         figs = [figure(slug, title, f) for f in files]
         blocks.append(
-            '        <section class="gallery-section" id="%s">\n'
+            '        <section class="gallery-section" id="%s"%s>\n'
             '          <h2 class="section-title" data-anim>%s</h2>\n'
             '          <div class="gallery">\n%s\n          </div>\n'
-            '        </section>\n' % (slug, title, "\n".join(figs)))
-        nav.append('            <a href="#%s">%s</a>\n' % (slug, title))
+            '        </section>\n' % (slug, "" if figs else " hidden", title, "\n".join(figs)))
+        if figs:
+            nav.append('            <a href="#%s">%s</a>\n' % (slug, title))
         print("%-10s %d photo(s)" % (html.unescape(title), len(figs)))
+    if len(nav) < 2:
+        nav = []
     page = put(page, "<!-- sections:start -->", "<!-- sections:end -->", "\n" + "".join(blocks) + "        ")
-    page = put(page, "<!-- nav:start -->", "<!-- nav:end -->", "\n" + "".join(nav) + "            ")
+    page = put(page, "<!-- nav:start -->", "<!-- nav:end -->", ("\n" + "".join(nav) + "            ") if nav else "")
     PAGE.write_text(page)
 
 
