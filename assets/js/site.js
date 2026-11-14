@@ -188,10 +188,16 @@
     doc.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && root.classList.contains('menu-open')) setOpen(false, true);
     });
-    // Same-page link (e.g. current page): just close.
+    // Link to the page you're already on: don't reload it (a reload runs the
+    // page transition while the menu is closing, which stutters). Close the
+    // menu and go back to the top instead.
     nav.addEventListener('click', function (e) {
       var a = e.target.closest && e.target.closest('a');
-      if (a && a.getAttribute('aria-current') === 'page') setOpen(false, false);
+      if (!a || a.getAttribute('aria-current') !== 'page') return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button > 0) return;   // new tab/window: leave it alone
+      e.preventDefault();
+      setOpen(false, false);
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
     });
     // Crossing the breakpoint: the old bar (links, or hamburger) fades out,
     // then the new one fades in, instead of one popping out and the other in.
