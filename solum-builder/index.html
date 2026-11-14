@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Solum Builder — a free circuit simulator for pedal builders · Solum</title>
-  <meta name="description" content="Solum Builder is a free circuit simulator for guitar-pedal builders. It runs on your own computer, with no account or cloud, and ships with 19 starter circuits. Source-available: build and sell pedals with it." />
+  <title>Solum Builder — a free circuit simulator for pedal builders, for Mac and in your browser · Solum</title>
+  <meta name="description" content="Solum Builder is a free, source-available circuit simulator for guitar-pedal builders, made for my own pedal work. Run it as a Mac app on Apple Silicon, or in your browser. No account, no cloud." />
   <link rel="canonical" href="https://solumfx.com/solum-builder/" />
   <meta name="theme-color" content="#1E1E1B" />
   <meta name="color-scheme" content="dark" />
@@ -16,16 +16,16 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Solum" />
   <meta property="og:locale" content="en_GB" />
-  <meta property="og:title" content="Solum Builder — a free circuit simulator for pedal builders · Solum" />
-  <meta property="og:description" content="Solum Builder is a free circuit simulator for guitar-pedal builders. It runs on your own computer, with no account or cloud, and ships with 19 starter circuits. Source-available: build and sell pedals with it." />
+  <meta property="og:title" content="Solum Builder — a free circuit simulator for pedal builders, for Mac and in your browser · Solum" />
+  <meta property="og:description" content="Solum Builder is a free, source-available circuit simulator for guitar-pedal builders, made for my own pedal work. Run it as a Mac app on Apple Silicon, or in your browser. No account, no cloud." />
   <meta property="og:url" content="https://solumfx.com/solum-builder/" />
   <meta property="og:image" content="https://solumfx.com/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="The Solum stamp: a silver ring with the word SOLUM and a fading rule, on a dark, softly glowing background." />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Solum Builder — a free circuit simulator for pedal builders · Solum" />
-  <meta name="twitter:description" content="Solum Builder is a free circuit simulator for guitar-pedal builders. It runs on your own computer, with no account or cloud, and ships with 19 starter circuits. Source-available: build and sell pedals with it." />
+  <meta name="twitter:title" content="Solum Builder — a free circuit simulator for pedal builders, for Mac and in your browser · Solum" />
+  <meta name="twitter:description" content="Solum Builder is a free, source-available circuit simulator for guitar-pedal builders, made for my own pedal work. Run it as a Mac app on Apple Silicon, or in your browser. No account, no cloud." />
   <meta name="twitter:image" content="https://solumfx.com/og-image.jpg" />
 
   <link rel="preload" href="/assets/fonts/fahkwang-normal-200.woff2" as="font" type="font/woff2" crossorigin />
@@ -55,10 +55,8 @@
       <ul>
           <li><a href="/guitar/"><span class="n">01</span>Guitar work</a></li>
           <li><a href="/pedals/"><span class="n">02</span>Pedals</a></li>
-          <li><a href="/solum-builder/" aria-current="page"><span class="n">03</span>Solum Builder</a></li>
-          <li><a href="/gallery/"><span class="n">04</span>Gallery</a></li>
-          <li><a href="/about/"><span class="n">05</span>About</a></li>
-          <li><a href="/contact/"><span class="n">06</span>Contact</a></li>
+          <li><a href="/about/"><span class="n">04</span>About</a></li>
+          <li><a href="/contact/"><span class="n">05</span>Contact</a></li>
       </ul>
       <p class="nav-foot">
         <a href="https://instagram.com/solumfx" rel="noopener">Instagram @solumfx</a><br>
@@ -74,9 +72,10 @@
         <p class="eyebrow" data-anim>Free · Source-available</p>
         <h1 class="page-title" data-anim style="--d:.1s">Solum Builder</h1>
         <p class="lede lede-wide" data-anim style="--d:.25s">A circuit simulator for guitar-pedal builders that runs on your own computer. Draw a circuit, probe any point in it, turn its knobs and watch the frequency curve follow, check it against plain-English rules, and hear it through an amp model.</p>
+        <p class="small" data-anim style="--d:.3s;margin-top:1.1rem">I built it for my own pedal work, and I'm sharing it in case it helps with yours.</p>
         <div class="actions" data-anim style="--d:.4s">
-          <a class="btn btn-primary" href="https://github.com/pbexiga/solum-builder" target="_blank" rel="noopener">View on GitHub <span class="arr" aria-hidden="true">&#8594;</span></a>
-          <a class="btn" href="#install">How to install <span class="arr" aria-hidden="true">&#8595;</span></a>
+          <a class="btn btn-primary" href="#run">Two ways to run it <span class="arr" aria-hidden="true">&#8595;</span></a>
+          <a class="btn" href="https://github.com/pbexiga/solum-builder" target="_blank" rel="noopener">View on GitHub <span class="arr" aria-hidden="true">&#8594;</span></a>
         </div>
       </div>
     </section>
@@ -84,13 +83,42 @@
     <section class="panel" style="padding-top:0" data-tone="ocean" data-glow="brass">
       <div class="wrap">
         <figure class="shot" data-anim><a href="/assets/img/builder-overview.webp" target="_blank" rel="noopener" aria-label="Open the full-size screenshot"><img src="/assets/img/builder-overview.webp" srcset="/assets/img/builder-overview-800.webp 800w, /assets/img/builder-overview.webp 1600w" sizes="(min-width: 64rem) 68rem, 100vw" width="1600" height="1000" alt="Solum Builder with the Ibanez TS808 Tube Screamer open: the schematic with its DC voltages, the frequency curve at the output, and the clipped output on the scope." decoding="async" /></a></figure>
-        <p class="shot-cap" data-anim>The Ibanez TS808 Tube Screamer, one of the 19 starter circuits, after a run: DC voltage at every node, and the probed point's gain, frequency curve and waveform.</p>
-        <div class="facts" data-stagger>
-          <div class="fact" data-anim><b>On your computer</b><p>No accounts, no cloud. It is for one person on one machine.</p></div>
-          <div class="fact" data-anim><b>Plain files</b><p>Your circuits are plain JSON files in a folder you choose.</p></div>
-          <div class="fact" data-anim><b>19 starters</b><p>TS808, Big Muff, Fuzz Face, Rat, BD-2 and more. Open one, then save a copy to change.</p></div>
-          <div class="fact" data-anim><b>Probe anything</b><p>Click any wire or part: waveform, harmonics and DC voltage, with gain, peaks, clipping and distortion.</p></div>
+        <p class="shot-cap" data-anim>The Ibanez TS808 Tube Screamer, one of the starter circuits, after a run: DC voltage at every node, and the probed point's gain, frequency curve and waveform.</p>
+      </div>
+    </section>
+
+    <section class="panel" id="run" data-tone="ink" data-glow="ocean">
+      <div class="wrap">
+        <p class="eyebrow" data-anim>Install</p>
+        <h2 class="section-title" data-anim style="margin-top:.9rem">Two ways to run it</h2>
+        <div class="ways" data-stagger>
+          <div class="way" data-anim>
+            <b>Mac app</b>
+            <p>Apple Silicon, macOS 14 or later. Download, drag to Applications, open.</p>
+            <div class="actions"><a class="btn btn-primary" href="https://github.com/pbexiga/solum-builder/releases/latest" target="_blank" rel="noopener">Download for Mac <span class="arr" aria-hidden="true">&#8594;</span></a></div>
+            <p class="small">First time opening it? See the <a class="link" href="https://github.com/pbexiga/solum-builder/blob/main/docs/guide/mac-app.md" target="_blank" rel="noopener">Mac app guide</a>.</p>
+          </div>
+          <div class="way" data-anim>
+            <b>Docker</b>
+            <p>Runs in your browser, on Windows, Linux, an Intel Mac or a home server.</p>
+            <div class="actions"><a class="btn" href="https://github.com/pbexiga/solum-builder#docker-any-computer" target="_blank" rel="noopener">Install guide <span class="arr" aria-hidden="true">&#8594;</span></a></div>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <section class="panel" data-tone="ocean" data-glow="brass">
+      <!-- When the recording is added, change wrap-narrow to "wrap feature" so it sits beside the text. -->
+      <div class="wrap-narrow">
+        <div class="feature-text">
+          <p class="eyebrow" data-anim>Draw &amp; probe</p>
+          <h2 class="section-title" data-anim>Click a wire, see the signal</h2>
+          <div class="prose" data-anim style="margin-top:1.2rem">
+            <p>Draw a circuit or open a starter, then click any wire or part: its waveform, harmonics and DC voltage, with gain, peaks, clipping and distortion.</p>
+            <p>Your circuits are plain files in a folder you choose. No account, no cloud.</p>
+          </div>
+        </div>
+        <!-- Recording slot: a short screen recording or GIF of probing a wire on the TS808 goes here, as a <figure class="shot">. -->
       </div>
     </section>
 
@@ -100,8 +128,9 @@
           <p class="eyebrow" data-anim>Frequency</p>
           <h2 class="section-title" data-anim>See what the knobs do</h2>
           <div class="prose" data-anim>
-            <p>How much louder or quieter each frequency comes out at the probed point, from 10&nbsp;Hz to 30&nbsp;kHz, with its peak and corners marked. It follows the knobs as you turn them.</p>
-            <p><strong>Part influence</strong> ranks the parts by how much they move the curve. <strong>Edit curve</strong> lets you drag a corner or a peak and changes the parts to match.</p>
+            <p>How loud each frequency comes out at the probed point, from 10&nbsp;Hz to 30&nbsp;kHz, with its peak and corners marked. It follows the knobs as you turn them.</p>
+            <p><strong>Part influence</strong> ranks the parts by how much each one moves the curve.</p>
+            <p><strong>Edit curve</strong> lets you drag a corner or a peak, and changes the parts to match.</p>
           </div>
         </div>
         <figure class="shot" data-anim><a href="/assets/img/builder-frequency.webp" target="_blank" rel="noopener" aria-label="Open the full-size screenshot"><img src="/assets/img/builder-frequency.webp" srcset="/assets/img/builder-frequency-800.webp 800w, /assets/img/builder-frequency.webp 1568w" sizes="(min-width: 64rem) 42rem, 100vw" width="1568" height="560" alt="The Frequency pane, large, on the TS808: the curve with its corners marked, the knob ranges and the parts that move the curve most." loading="lazy" decoding="async" /></a></figure>
@@ -128,43 +157,58 @@
           <p class="eyebrow" data-anim>Audio</p>
           <h2 class="section-title" data-anim>Hear it</h2>
           <div class="prose" data-anim>
-            <p>A guitar recording through the circuit, then through a NAM amp capture and a cab IR if you add them. Switch between <strong>Dry</strong>, <strong>Pedal</strong> and a kept <strong>Snapshot</strong> while it plays.</p>
-            <p class="small">Nothing to listen to ships with the app: you bring your own recording, amp captures and cab IRs.</p>
+            <p>A guitar recording through the circuit, then through an amp model and a cab. Switch between <strong>Dry</strong>, <strong>Pedal</strong> and <strong>Snapshot</strong> while it plays.</p>
+            <p><strong>Snapshot</strong> is a take you keep, to compare against after a change.</p>
+            <p class="small">You bring your own recording, NAM capture and cab IR.</p>
           </div>
         </div>
         <figure class="shot" data-anim><a href="/assets/img/builder-audio.webp" target="_blank" rel="noopener" aria-label="Open the full-size screenshot"><img src="/assets/img/builder-audio.webp" srcset="/assets/img/builder-audio-800.webp 800w, /assets/img/builder-audio.webp 1568w" sizes="(min-width: 64rem) 42rem, 100vw" width="1568" height="560" alt="The Audio pane, large: the spectrum of the pedal against the dry guitar, the Guitar, Pedal, Amp and Cab chain, and the player." loading="lazy" decoding="async" /></a></figure>
       </div>
     </section>
 
-    <section class="panel" id="install" data-tone="ink" data-glow="ocean">
+    <section class="panel" data-tone="ocean" data-glow="brass">
       <div class="wrap-narrow">
-        <p class="eyebrow" data-anim>Install</p>
-        <h2 class="section-title" data-anim style="margin-top:.9rem">Run it in a few minutes</h2>
+        <p class="eyebrow" data-anim>Starters</p>
+        <h2 class="section-title" data-anim style="margin-top:.9rem">Classic pedals to open and study</h2>
         <div class="prose" data-anim style="margin-top:1.4rem">
-          <p>You need Docker (or Podman) with Compose, on an x86-64 or ARM64 machine, Apple Silicon included.</p>
+          <p>Each one is drawn from a published schematic. Open one, then save a copy to change. Several come twice: the original, and Aion FX's kit version.</p>
         </div>
-        <pre class="code" data-anim tabindex="0"><span class="c">$</span> git clone https://github.com/pbexiga/solum-builder.git
-<span class="c">$</span> cd solum-builder
-<span class="c">$</span> cp .env.example .env
-<span class="c">$</span> docker compose up</pre>
-        <div class="prose" data-anim style="margin-top:1.4rem">
-          <p>Then open <code>http://localhost:8000</code>. The first run builds the image, which takes a few minutes. With Podman, use <code>podman compose</code>.</p>
-          <p>The setup, updating, running from source and the full guide are in the <a href="https://github.com/pbexiga/solum-builder" target="_blank" rel="noopener">README on GitHub</a>.</p>
-        </div>
+        <ul class="starters" data-anim>
+          <li>Big Muff Pi (V3)</li>
+          <li>Big Muff Pi (Aion Halo)</li>
+          <li>Boss BD-2 Blues Driver</li>
+          <li>Boss BD-2 (Aion Sapphire)</li>
+          <li>Boss DS-1 Distortion</li>
+          <li>Boss DS-1 (Aion Comet)</li>
+          <li>Dallas Rangemaster (OC44)</li>
+          <li>Fuzz Face (AC128)</li>
+          <li>Klon Centaur</li>
+          <li>Klon Centaur (Aion Refractor)</li>
+          <li>Klon Centaur (Aion Refractor, with footswitch)</li>
+          <li>Marshall Bluesbreaker</li>
+          <li>Marshall Bluesbreaker (Aion Cerulean)</li>
+          <li>MXR Dyna Comp</li>
+          <li>MXR Dyna Comp (Aion Aurora)</li>
+          <li>ProCo Rat</li>
+          <li>Tone Bender MkII (germanium)</li>
+          <li>Tone Bender MkII (Aion Deimos, Mode switch)</li>
+          <li>Ibanez TS808 Tube Screamer</li>
+        </ul>
       </div>
     </section>
 
-    <section class="panel" data-tone="ocean" data-glow="brass">
+    <section class="panel" data-tone="ink" data-glow="ocean">
       <div class="wrap-narrow">
         <p class="eyebrow" data-anim>Licence</p>
-        <h2 class="section-title" data-anim style="margin-top:.9rem">Free to use, free to change</h2>
+        <h2 class="section-title" data-anim style="margin-top:.9rem">Free to use</h2>
         <div class="prose" data-anim style="margin-top:1.4rem">
-          <p>Solum Builder is source-available. Anyone may use it, change it and share it. Nobody may sell it, or a product or service whose value is mainly the app itself.</p>
-          <p><strong>Designing, building and selling pedals with it is allowed.</strong></p>
-          <p class="small">MIT with the Commons Clause. Fonts, the plotting library, makers' SPICE models and the sources the starter circuits follow keep their own terms.</p>
+          <p><strong>It's free to use, the Mac app included. Build pedals with it and sell them if you like. Please don't resell the app itself.</strong></p>
+          <p>It's source-available: you can read the code, change it and share it.</p>
+          <p class="small">The full terms are in the <a href="https://github.com/pbexiga/solum-builder/blob/main/LICENSE" target="_blank" rel="noopener">licence</a>: MIT with the Commons Clause.</p>
         </div>
         <div class="actions" data-anim>
-          <a class="btn btn-primary" href="https://github.com/pbexiga/solum-builder" target="_blank" rel="noopener">View on GitHub <span class="arr" aria-hidden="true">&#8594;</span></a>
+          <a class="btn btn-primary" href="https://github.com/pbexiga/solum-builder/blob/main/LICENSE" target="_blank" rel="noopener">Read the licence <span class="arr" aria-hidden="true">&#8594;</span></a>
+          <a class="btn" href="https://github.com/pbexiga/solum-builder" target="_blank" rel="noopener">View on GitHub <span class="arr" aria-hidden="true">&#8594;</span></a>
         </div>
       </div>
     </section>
@@ -182,8 +226,6 @@
         <nav class="foot-nav" aria-label="Footer">
           <a href="/guitar/">Guitar work</a>
           <a href="/pedals/">Pedals</a>
-          <a href="/solum-builder/">Solum Builder</a>
-          <a href="/gallery/">Gallery</a>
           <a href="/about/">About</a>
           <a href="/contact/">Contact</a>
         </nav>
