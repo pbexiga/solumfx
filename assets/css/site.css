@@ -212,10 +212,10 @@ html.arriving .glow { transition: none; }   /* after a page switch the glows are
   content: '';
   position: absolute;
   inset: 0 0 -1.5rem 0;
-  /* solid across the bar itself, so nothing shows through it while the page
-     behind is redrawn; only the strip below the bar fades out */
-  background: linear-gradient(to bottom, rgb(30,30,27) 0%, rgb(30,30,27) 55%, transparent 100%);
-  background: linear-gradient(to bottom, var(--bg) 0%, var(--bg) 55%, color-mix(in srgb, var(--bg) 70%, transparent) 75%, transparent 100%);
+  /* nearly solid across the bar (97%), so little shows through it while the
+     page behind is redrawn; the strip below the bar fades out */
+  background: linear-gradient(to bottom, rgba(30,30,27,0.97) 0%, rgba(30,30,27,0.97) 48%, transparent 100%);
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--bg) 97%, transparent) 0%, color-mix(in srgb, var(--bg) 97%, transparent) 48%, transparent 100%);
   pointer-events: none;
   z-index: -1;
   transition: transform 0.6s ease;
