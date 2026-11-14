@@ -675,6 +675,7 @@ html.swapped:not(.compact) .site-nav ul { animation: nav-in 0.5s ease both; }
   text-transform: uppercase; line-height: 1;
 }
 .soon .lede { text-align: center; margin-inline: auto; }
+.soon .actions { justify-content: center; }
 .notes { margin-top: 4.5rem; display: grid; gap: 2.4rem; text-align: center; }
 .note b { display: block; font-family: var(--display); font-weight: 300; font-size: 0.68rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--brass); }
 .note p { margin-top: 0.5rem; font-style: italic; color: var(--cloud); font-size: 1rem; line-height: 1.65; }
@@ -920,3 +921,16 @@ html.lb-open { overflow: hidden; }
   .photo-frame, .lb-fig, .lb-img { transition: none; }
   .lightbox[open], .lightbox.closing { animation: none; }
 }
+
+/* Solum Builder: two ways to run it, and the starter list */
+.ways { display: grid; gap: 0; margin-top: 2.2rem; }
+.way { padding: 1.6rem 0; border-top: 1px solid rgba(240,237,232,0.08); }
+.way b { display: block; font-family: var(--display); font-weight: 300; font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--bone); }
+.way p { margin-top: 0.7rem; font-size: 1rem; line-height: 1.7; color: var(--cloud); max-width: 44ch; }
+.way .actions { margin-top: 1.3rem; }
+.way .small { margin-top: 1rem; }
+@media (min-width: 48rem) { .ways { grid-template-columns: repeat(2, 1fr); column-gap: 3rem; } }
+.starters { margin-top: 1.6rem; columns: 1; column-gap: 2.5rem; }
+.starters li { break-inside: avoid; padding: 0.3rem 0; font-size: 0.98rem; color: var(--cloud); line-height: 1.5; }
+@media (min-width: 40rem) { .starters { columns: 2; } }
+.wrap-narrow > .starters { max-width: 48rem; }
