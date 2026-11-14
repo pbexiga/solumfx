@@ -15,7 +15,11 @@
 @media (prefers-reduced-motion: no-preference) {
   @view-transition { navigation: auto; }
 }
-::view-transition-old(root) { animation: vt-out 0.16s ease both; }
+/* The new page fades in over the old one, which stays fully visible underneath
+   until it is covered. (Fading the old one out at the same time let the
+   background glow dip, which showed as the bar going dark for a moment.) The
+   new page's text rises in after the switch, so the two never overlap. */
+::view-transition-old(root) { animation: none; }
 ::view-transition-new(root) { animation: vt-in 0.26s ease both; }
 ::view-transition-group(site-header) { animation-duration: 0s; }
 /* Menu links (wide layout) each get their own transition, so on a page switch
@@ -112,7 +116,11 @@ body::after {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
   opacity: 0.012;
   pointer-events: none;
-  z-index: 9999;
+  /* under the header (z-index 50), above the page (1). Over the header, the
+     grain lightened the bar slightly, but a page switch draws the header above
+     the page snapshot, grain included, so the bar went darker until the switch
+     ended and then stepped lighter. */
+  z-index: 40;
 }
 
 /* ── GLOWS (fixed; opacity follows scroll) ───────────────── */
