@@ -18,6 +18,19 @@
 ::view-transition-old(root) { animation: vt-out 0.16s ease both; }
 ::view-transition-new(root) { animation: vt-in 0.26s ease both; }
 ::view-transition-group(site-header) { animation-duration: 0s; }
+/* Menu links (wide layout) each get their own transition, so on a page switch
+   the old page's underline fades out while the new one fades in; the rest of
+   the header still swaps instantly. */
+html:not(.compact) .site-nav li:nth-child(1) a { view-transition-name: nav-1; }
+html:not(.compact) .site-nav li:nth-child(2) a { view-transition-name: nav-2; }
+html:not(.compact) .site-nav li:nth-child(3) a { view-transition-name: nav-3; }
+html:not(.compact) .site-nav li:nth-child(4) a { view-transition-name: nav-4; }
+html:not(.compact) .site-nav li:nth-child(5) a { view-transition-name: nav-5; }
+html:not(.compact) .site-nav li:nth-child(6) a { view-transition-name: nav-6; }
+::view-transition-group(nav-1), ::view-transition-group(nav-2), ::view-transition-group(nav-3),
+::view-transition-group(nav-4), ::view-transition-group(nav-5), ::view-transition-group(nav-6) {
+  animation-duration: 0.45s; animation-timing-function: ease;
+}
 @keyframes vt-out { to { opacity: 0; } }
 @keyframes vt-in  { from { opacity: 0; } }
 
@@ -199,8 +212,10 @@ html.arriving .glow { transition: none; }   /* after a page switch the glows are
   content: '';
   position: absolute;
   inset: 0 0 -1.5rem 0;
-  background: linear-gradient(to bottom, rgba(30,30,27,0.9) 0%, rgba(30,30,27,0.9) 40%, transparent 100%);
-  background: linear-gradient(to bottom, color-mix(in srgb, var(--bg) 94%, transparent) 0%, color-mix(in srgb, var(--bg) 94%, transparent) 45%, transparent 100%);
+  /* solid across the bar itself, so nothing shows through it while the page
+     behind is redrawn; only the strip below the bar fades out */
+  background: linear-gradient(to bottom, rgb(30,30,27) 0%, rgb(30,30,27) 55%, transparent 100%);
+  background: linear-gradient(to bottom, var(--bg) 0%, var(--bg) 55%, color-mix(in srgb, var(--bg) 70%, transparent) 75%, transparent 100%);
   pointer-events: none;
   z-index: -1;
   transition: transform 0.6s ease;
