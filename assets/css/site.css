@@ -713,6 +713,7 @@ html.swapped:not(.compact) .site-nav ul { animation: nav-in 0.5s ease both; }
   background: var(--ink);
   box-shadow: 0 2.5rem 6rem -1.5rem rgba(0,0,0,0.55), 0 0 0 1px rgba(0,0,0,0.2);
 }
+.shot > a { display: block; cursor: zoom-in; }
 .shot img { width: 100%; height: auto; }
 .shot-cap { margin-top: 1.1rem; font-style: italic; color: var(--cloud); font-size: 0.98rem; line-height: 1.65; max-width: 60ch; }
 .facts { display: grid; gap: 0; margin-top: 2.6rem; }
